@@ -1,0 +1,35 @@
+The code in this project is related to specific folksonomy data.
+
+~~~~~~~~~~~~~~~~~~~~~ file content ~~~~~~~~~~~~~~~~~~~~~
+
+filename: userDocTag.k=2
+entry 1 in line ... user
+entry 2 in line ... resid
+entry 3 in line ... tag
+
+!!NB: in the following the unix commands as helpers to process large folksonomy data
+      these files were used in the python code provided in this repository
+
+
+
+~~~~~~~~~~~~~~~~~~~~~ create personomies ~~~~~~~~~~~~~~~
+
+cut -f1,3 userDocTag.k=2 > user_tags
+sort -k1,1 -k2,2 -t " " user_tags > user_tags_sorted
+uniq -c user_tags_sorted > user_tags_personomy
+sed -e  's/^[ \s]*//' user_tags_personomy > personomies_hlp
+expand -t1 personomies_hlp | sort -nk2,2 -nk1,1 -t ' ' > personomies
+
+
+~~~~~~~~~ create nr. of resources per user ~~~~~~~~~~~~
+
+cut -f1,2 userDocTags.k_2 | sort -nk1,1 -nk2,2 -t " " | uniq | cut -f1 | uniq -c | sed -e  's/^[ \s]*//' > user_resources_count
+
+
+~~~~~~~~ create number of resources per tag ~~~~~~~~~~~
+
+cut -f2,3 userDocTags.k_2 | sort -k2,2 -k1,1 -t "\t" > hlp4
+uniq hlp4 | cut -f1 | uniq -c | sed -e  's/^[ \s]*//' > count_resourcespertag
+
+
+
