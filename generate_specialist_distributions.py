@@ -5,11 +5,12 @@ import pickle
 import collections
 from numpy import median
 
-
+from parameters import * #NB: not in github
 #NB: we define an active tagger as someone who has:
-#1) at least > 20 resources 
-#2) at least > 5 tags 
-#3) at least > 60 tag assignments
+#1) at least > xx resources 
+#2) at least > xx tags 
+#3) at least > xx tag assignments
+
 
 
 file_ = open('data/user_resources_count')
@@ -60,9 +61,6 @@ tag_eu_trust = 0.0
 tag_d_trust = 0.0
 tag_t_trust = 0.0
 
-#set threshold for trust level, the lower the less strict the level is
-trust_lim = 0.7
-
 #file_write= open('results/help_file','wb')
 
 old_username = ''
@@ -103,19 +101,19 @@ for line in file_:
 	  #print 'first', freq, tag_fu, tag_fr, tag_t, tag_d, tag_eu
 	  #print 'after',tag_fu_sum, tag_fr_sum, tag_t_sum, tag_d_sum, tag_eu_sum
       elif not(old_username == ''):
-	if (dict_userres[old_username] > 20) and (tag_sum > 5) and (tas_sum > 60):
+	if (dict_userres[old_username] > ACTIVETAGGER_RESOURCE_THRESHOLD) and (tag_sum > ACTIVETAGGER_TAG_THRESHOLD) and (tas_sum > ACTIVETAGGER_TAS_THRESHOLD):
 	    tas.append(tas_sum)
 	    username.append(old_username)
 	    #if (old_username == '1165'): print tag_sum, tas_sum, tag_fu_sum, tag_fr_sum, tag_t_sum, tag_d_sum, tag_eu_sum
-	    if not(tag_fu_trust > trust_lim*tag_sum): fu.append(median(tag_fu_sum) / (tas_sum ))
+	    if not(tag_fu_trust > TRUST_LIMIT*tag_sum): fu.append(median(tag_fu_sum) / (tas_sum ))
 	    else: fu.append(-1.0)
-	    if not(tag_fr_trust > trust_lim*tag_sum): fr.append(median(tag_fr_sum) / (tas_sum))
+	    if not(tag_fr_trust > TRUST_LIMIT*tag_sum): fr.append(median(tag_fr_sum) / (tas_sum))
 	    else: fr.append(-1.0)
-	    if not(tag_eu_trust > trust_lim*tag_sum): eu.append(median(tag_eu_sum) / (tas_sum))
+	    if not(tag_eu_trust > TRUST_LIMIT*tag_sum): eu.append(median(tag_eu_sum) / (tas_sum))
 	    else: eu.append(-1.0)
-	    if not(tag_t_trust > trust_lim*tag_sum): t.append(median(tag_t_sum) / (tas_sum))
+	    if not(tag_t_trust > TRUST_LIMIT*tag_sum): t.append(median(tag_t_sum) / (tas_sum))
 	    else: t.append(-1.0)
-	    if not(tag_d_trust > trust_lim*tag_sum): d.append(median(tag_d_sum) / (tas_sum))
+	    if not(tag_d_trust > TRUST_LIMIT*tag_sum): d.append(median(tag_d_sum) / (tas_sum))
 	    else: d.append(-1.0)
 	    fu_t.append(tag_fu_trust / tag_sum)
 	    fr_t.append(tag_fr_trust / tag_sum)
@@ -147,18 +145,18 @@ for line in file_:
 	else: tag_t_trust += 1
       old_username = new_username
 
-if (dict_userres[old_username] > 20) and (tag_sum > 5) and (tas_sum > 60):
+if (dict_userres[old_username] > ACTIVETAGGER_RESOURCE_THRESHOLD) and (tag_sum > ACTIVETAGGER_TAG_THRESHOLD) and (tas_sum > ACTIVETAGGER_TAS_THRESHOLD):
     tas.append(tas_sum)
     username.append(old_username)
-    if not(tag_fu_trust > trust_lim*tag_sum): fu.append(median(tag_fu_sum) / (tas_sum))
+    if not(tag_fu_trust > TRUST_LIMIT*tag_sum): fu.append(median(tag_fu_sum) / (tas_sum))
     else: fu.append(-1.0)
-    if not(tag_fr_trust > trust_lim*tag_sum): fr.append(median(tag_fr_sum) / (tas_sum))
+    if not(tag_fr_trust > TRUST_LIMIT*tag_sum): fr.append(median(tag_fr_sum) / (tas_sum))
     else: fr.append(-1.0)
-    if not(tag_eu_trust > trust_lim*tag_sum): eu.append(median(tag_eu_sum) / (tas_sum))
+    if not(tag_eu_trust > TRUST_LIMIT*tag_sum): eu.append(median(tag_eu_sum) / (tas_sum))
     else: eu.append(-1.0)
-    if not(tag_t_trust > trust_lim*tag_sum): t.append(median(tag_t_sum) / (tas_sum))
+    if not(tag_t_trust > TRUST_LIMIT*tag_sum): t.append(median(tag_t_sum) / (tas_sum))
     else: t.append(-1.0)
-    if not(tag_d_trust > trust_lim*tag_sum): d.append(median(tag_d_sum) / (tas_sum))
+    if not(tag_d_trust > TRUST_LIMIT*tag_sum): d.append(median(tag_d_sum) / (tas_sum))
     else: d.append(-1.0)
     fu_t.append(tag_fu_trust / tag_sum)
     fr_t.append(tag_fr_trust / tag_sum)
