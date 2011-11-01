@@ -4,6 +4,8 @@ __author__ = 'kschoef'
 
 import collections
 from TagDictionary import TagDictionary
+import json
+import csv
 
 def user_academicstatus_lookup():
   file_ = open('data/user_academicStatusId')
@@ -24,8 +26,8 @@ def user_academicstatus_lookup():
 def user_discipline_lookup():            
   file_ = open('ground/users_distribution_overDiscipline.via_resources')
   count_abweichung = 0
-  userdiscipline_dict = defaultdict(list)
-  userowndiscipline_dict = defaultdict(str)
+  userdiscipline_dict = collections.defaultdict(list)
+  userowndiscipline_dict = collections.defaultdict(str)
   for line in file_: 
       row = line.strip('\n').split('\t')
       user = row[0]
@@ -41,8 +43,8 @@ def relevantuserdisc_lookup(threshold=0.0):
   and the id of the self-added discipline for each user"""
   file_ = open('ground/users_distribution_overDiscipline.via_resources')
   count_abweichung = 0
-  userdiscipline_dict = defaultdict(list)
-  userowndiscipline_dict = defaultdict(str)
+  userdiscipline_dict = collections.defaultdict(list)
+  userowndiscipline_dict = collections.defaultdict(str)
   for line in file_: 
       row = line.strip('\n').split('\t')
       user = row[0]
@@ -50,16 +52,15 @@ def relevantuserdisc_lookup(threshold=0.0):
       di = row[2]
       userowndiscipline_dict[user] = di
       #calculate
-      if (threshold > 0.0 and threshold <= 1.0):
+      if (threshold > 0.0 and threshold <= 1.0 and not disciplines=={}):	
 	m = max(disciplines.values())
-	for key in disciplines:
+	keys = disciplines.keys()
+	for key in keys:
 	  if disciplines[key] < threshold*m:
 	    del disciplines[key]
       userdiscipline_dict[user] = len(disciplines)
   return userdiscipline_dict, userowndiscipline_dict
-  
-
-  
+    
   
 def user_nrresources_lookup(): 
   file_ = open('data/user_resources_count')
@@ -140,3 +141,15 @@ def read_extended_personomy_file(line):
       if not(row[7] == 'None'): tag_t = float(row[7])
       else: tag_t = None
       return username, freq, tag_fr, tag_fu, tag_eu, tag_t, tag_d
+      
+      
+      
+      
+def specialist_info_lookup(userlist=None):
+  # userID nr_tag nr_tas fu trust fr trust eu trust eu trust t trust d trust nr_res
+  reader = csv.reader(open('results/specialist_info', 'r'), delimiter='\t')
+  count = 0
+  for line in reader:
+
+
+  
