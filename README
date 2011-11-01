@@ -33,3 +33,10 @@ uniq hlp4 | cut -f1 | uniq -c | sed -e  's/^[ \s]*//' > count_resourcespertag
 
 
 
+
+~~~~~~~~~~~~~~~~~~~ files to run  ~~~~~~~~~~~~~~~~~~~~~~
+generate_extended_personomyfile.py 
+generate_specialist_distributions.py
+
+
+
