@@ -36,7 +36,11 @@ uniq hlp4 | cut -f1 | uniq -c | sed -e  's/^[ \s]*//' > count_resourcespertag
 
 ~~~~~~~~~~~~~~~~~~~ files to run  ~~~~~~~~~~~~~~~~~~~~~~
 generate_extended_personomyfile.py 
-generate_specialist_distributions.py
+generate_specialist_distributions.py - generate specialist level for all users and for all tag_generality_measures
+extremeexamples_specialists_generalists.py - caculate list of generalist / specialist usernames that are 
+    1) in the 10% most extrem specialists or generalists (with percentile = 10%, 90%) and
+    2) fullfill that criteria for all tag_generality_measures - this results in our dataset for about 800 users for each class
+generate_specialist_info.py - constructs a file with each line containing the username and all relevant measures and ground truth data
 
 
 
