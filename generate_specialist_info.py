@@ -17,24 +17,24 @@ file_write = open('results/specialist_info','wb')
 #username nr_tag nr_tas fu trust fr trust eu trust eu trust t trust d trust nr_res
 
 for line in file_:
-        row = line.strip('\n').split('\t')
-        user = row[0]
-        fail = False
-        #check if all data for user is available:
-        try:
-	  prof = user_adacemicstatus_dict[user] 
-	  derived_disc = user_disciplines_dict[user]
-	  disc = user_owndiscipline_dict[user]
-	  nr_res = user_nres_dict[user]
-	except: fail = True  
-	#if data available, write in file  
-        if not(fail):
-	  new_line = line.strip('\n')
-	  new_line += '\t'+str(nr_res)	  
-	  new_line += '\t'+str(prof)
-	  new_line += '\t'+str(derived_disc)
-	  new_line += '\t'+str(disc) + '\n'
-          file_write.write(new_line)
-          
-          
+    row = line.strip('\n').split('\t')
+    user = row[0]
+    fail = False
+    #check if all data for user is available:
+    try:
+        prof = user_adacemicstatus_dict[user]
+        derived_disc = user_disciplines_dict[user]
+        disc = user_owndiscipline_dict[user]
+        nr_res = user_nres_dict[user]
+    except: fail = True
+    #if data available, write in file
+    if not(fail):
+        new_line = line.strip('\n')
+        new_line += '\t'+str(nr_res)
+        new_line += '\t'+str(prof)
+        new_line += '\t'+str(derived_disc)
+        new_line += '\t'+str(disc) + '\n'
+        file_write.write(new_line)
+
+
 file_write.close()          

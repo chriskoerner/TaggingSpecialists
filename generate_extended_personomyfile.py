@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from lookup_utilities import read_normalizedTagGeneralityData
-import pickle
+#import pickle
 
 #read tag information
 TD = read_normalizedTagGeneralityData()

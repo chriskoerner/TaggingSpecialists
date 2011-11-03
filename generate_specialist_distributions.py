@@ -48,78 +48,78 @@ old_username = ''
 
 for line in file_:
 
-      new_username, freq, tag_fr, tag_fu, tag_eu, tag_t, tag_d = read_extended_personomy_file(line)
-      
-      if (new_username == old_username) or (old_username == ''):
-	#just add data
+    new_username, freq, tag_fr, tag_fu, tag_eu, tag_t, tag_d = read_extended_personomy_file(line)
+
+    if (new_username == old_username) or (old_username == ''):
+        #just add data
         expertUser.add_userdata(freq, tag_fr, tag_fu, tag_eu, tag_t, tag_d)
 
-      elif not(old_username == ''):
-	#save data for user and proceed to next user
-	if (dict_userres[old_username] > ACTIVETAGGER_RESOURCE_THRESHOLD) and (expertUser.tag_sum > ACTIVETAGGER_TAG_THRESHOLD) and (expertUser.tas_sum > ACTIVETAGGER_TAS_THRESHOLD):
-	    tag_sum = expertUser.get_tag_sum()
-	    tas_sum = expertUser.get_tas_sum()
-	    tas.append(tas_sum)
-	    tag_freq.append(tag_sum)
-	    username.append(old_username)
-	    #if (old_username == '1165'): print tag_sum, tas_sum, tag_fu_sum, tag_fr_sum, tag_t_sum, tag_d_sum, tag_eu_sum
-	    if not(expertUser.get_tag_fu_trust() > TRUST_LIMIT*tag_sum): fu.append(median(expertUser.get_tag_fu_sum()) / (tas_sum ))
-	    else: fu.append(-1.0)
-	    fu_t.append(expertUser.get_tag_fu_trust() / tag_sum)
-	    
-	    if not(expertUser.get_tag_fr_trust() > TRUST_LIMIT*tag_sum): fr.append(median(expertUser.get_tag_fr_sum()) / (tas_sum))
-	    else: fr.append(-1.0)
-	    fr_t.append(expertUser.get_tag_fr_trust() / tag_sum)
-	    
-	    if not(expertUser.get_tag_eu_trust() > TRUST_LIMIT*tag_sum): eu.append(median(expertUser.get_tag_eu_sum()) / (tas_sum))
-	    else: eu.append(-1.0)
-	    eu_t.append(expertUser.get_tag_eu_trust() / tag_sum)
-	    
-	    if not(expertUser.get_tag_t_trust() > TRUST_LIMIT*tag_sum): t.append(median(expertUser.get_tag_t_sum()) / (tas_sum))
-	    else: t.append(-1.0)
-	    d_t.append(expertUser.get_tag_d_trust() / tag_sum)
-	    
-	    if not(expertUser.get_tag_d_trust() > TRUST_LIMIT*tag_sum): d.append(median(expertUser.get_tag_d_sum()) / (tas_sum))
-	    else: d.append(-1.0)
-	    t_t.append(expertUser.get_tag_t_trust() / tag_sum)
-   
-	    #print len(username), len(d), len(fr), len(fu), len(eu), len(t)	        
+    elif not(old_username == ''):
+        #save data for user and proceed to next user
+        if (dict_userres[old_username] > ACTIVETAGGER_RESOURCE_THRESHOLD) and (expertUser.tag_sum > ACTIVETAGGER_TAG_THRESHOLD) and (expertUser.tas_sum > ACTIVETAGGER_TAS_THRESHOLD):
+            tag_sum = expertUser.get_tag_sum()
+            tas_sum = expertUser.get_tas_sum()
+            tas.append(tas_sum)
+            tag_freq.append(tag_sum)
+            username.append(old_username)
+            #if (old_username == '1165'): print tag_sum, tas_sum, tag_fu_sum, tag_fr_sum, tag_t_sum, tag_d_sum, tag_eu_sum
+            if not(expertUser.get_tag_fu_trust() > TRUST_LIMIT*tag_sum): fu.append(median(expertUser.get_tag_fu_sum()) / (tas_sum ))
+            else: fu.append(-1.0)
+            fu_t.append(expertUser.get_tag_fu_trust() / tag_sum)
+
+            if not(expertUser.get_tag_fr_trust() > TRUST_LIMIT*tag_sum): fr.append(median(expertUser.get_tag_fr_sum()) / (tas_sum))
+            else: fr.append(-1.0)
+            fr_t.append(expertUser.get_tag_fr_trust() / tag_sum)
+
+            if not(expertUser.get_tag_eu_trust() > TRUST_LIMIT*tag_sum): eu.append(median(expertUser.get_tag_eu_sum()) / (tas_sum))
+            else: eu.append(-1.0)
+            eu_t.append(expertUser.get_tag_eu_trust() / tag_sum)
+
+            if not(expertUser.get_tag_t_trust() > TRUST_LIMIT*tag_sum): t.append(median(expertUser.get_tag_t_sum()) / (tas_sum))
+            else: t.append(-1.0)
+            d_t.append(expertUser.get_tag_d_trust() / tag_sum)
+
+            if not(expertUser.get_tag_d_trust() > TRUST_LIMIT*tag_sum): d.append(median(expertUser.get_tag_d_sum()) / (tas_sum))
+            else: d.append(-1.0)
+            t_t.append(expertUser.get_tag_t_trust() / tag_sum)
+
+            #print len(username), len(d), len(fr), len(fu), len(eu), len(t)
         expertUser = ExpertUser1()
         expertUser.add_userdata(freq, tag_fr, tag_fu, tag_eu, tag_t, tag_d)
-        
-      old_username = new_username
+
+    old_username = new_username
 
 if (dict_userres[old_username] > ACTIVETAGGER_RESOURCE_THRESHOLD) and (tag_sum > ACTIVETAGGER_TAG_THRESHOLD) and (tas_sum > ACTIVETAGGER_TAS_THRESHOLD):
-	    tag_sum = expertUser.get_tag_sum()
-	    tas_sum = expertUser.get_tas_sum()
-	    tas.append(tas_sum)
-	    tag_freq.append(tag_sum)
-	    username.append(old_username)
-	    #if (old_username == '1165'): print tag_sum, tas_sum, tag_fu_sum, tag_fr_sum, tag_t_sum, tag_d_sum, tag_eu_sum
-	    if not(expertUser.get_tag_fu_trust() > TRUST_LIMIT*tag_sum): fu.append(median(expertUser.get_tag_fu_sum()) / (tas_sum ))
-	    else: fu.append(-1.0)
-	    fu_t.append(expertUser.get_tag_fu_trust() / tag_sum)
-	    
-	    if not(expertUser.get_tag_fr_trust() > TRUST_LIMIT*tag_sum): fr.append(median(expertUser.get_tag_fr_sum()) / (tas_sum))
-	    else: fr.append(-1.0)
-	    fr_t.append(expertUser.get_tag_fr_trust() / tag_sum)
-	    
-	    if not(expertUser.get_tag_eu_trust() > TRUST_LIMIT*tag_sum): eu.append(median(expertUser.get_tag_eu_sum()) / (tas_sum))
-	    else: eu.append(-1.0)
-	    eu_t.append(expertUser.get_tag_eu_trust() / tag_sum)
-	    
-	    if not(expertUser.get_tag_t_trust() > TRUST_LIMIT*tag_sum): t.append(median(expertUser.get_tag_t_sum()) / (tas_sum))
-	    else: t.append(-1.0)
-	    d_t.append(expertUser.get_tag_d_trust() / tag_sum)
-	    
-	    if not(expertUser.get_tag_d_trust() > TRUST_LIMIT*tag_sum): d.append(median(expertUser.get_tag_d_sum()) / (tas_sum))
-	    else: d.append(-1.0)
-	    t_t.append(expertUser.get_tag_t_trust() / tag_sum) 
+    tag_sum = expertUser.get_tag_sum()
+    tas_sum = expertUser.get_tas_sum()
+    tas.append(tas_sum)
+    tag_freq.append(tag_sum)
+    username.append(old_username)
+    #if (old_username == '1165'): print tag_sum, tas_sum, tag_fu_sum, tag_fr_sum, tag_t_sum, tag_d_sum, tag_eu_sum
+    if not(expertUser.get_tag_fu_trust() > TRUST_LIMIT*tag_sum): fu.append(median(expertUser.get_tag_fu_sum()) / (tas_sum ))
+    else: fu.append(-1.0)
+    fu_t.append(expertUser.get_tag_fu_trust() / tag_sum)
+
+    if not(expertUser.get_tag_fr_trust() > TRUST_LIMIT*tag_sum): fr.append(median(expertUser.get_tag_fr_sum()) / (tas_sum))
+    else: fr.append(-1.0)
+    fr_t.append(expertUser.get_tag_fr_trust() / tag_sum)
+
+    if not(expertUser.get_tag_eu_trust() > TRUST_LIMIT*tag_sum): eu.append(median(expertUser.get_tag_eu_sum()) / (tas_sum))
+    else: eu.append(-1.0)
+    eu_t.append(expertUser.get_tag_eu_trust() / tag_sum)
+
+    if not(expertUser.get_tag_t_trust() > TRUST_LIMIT*tag_sum): t.append(median(expertUser.get_tag_t_sum()) / (tas_sum))
+    else: t.append(-1.0)
+    d_t.append(expertUser.get_tag_d_trust() / tag_sum)
+
+    if not(expertUser.get_tag_d_trust() > TRUST_LIMIT*tag_sum): d.append(median(expertUser.get_tag_d_sum()) / (tas_sum))
+    else: d.append(-1.0)
+    t_t.append(expertUser.get_tag_t_trust() / tag_sum)
 
 
 
-  
-  
+
+
 fu_n = normalize_data(fu)
 fr_n = normalize_data(fr)
 eu_n = normalize_data(eu)
@@ -146,5 +146,5 @@ for i in range(len(username)):
     str_ += '\t'+str(d_n[i]) + '\t' + str(d_t[i])
     str_ += '\n'
     file_write.write(str_)
-    
+
 file_write.close()    
