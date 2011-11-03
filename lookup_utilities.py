@@ -5,7 +5,7 @@ __author__ = 'kschoef'
 import collections
 from TagDictionary import TagDictionary
 import json
-import csv
+# import csv
 
 def user_academicstatus_lookup():
     file_ = open('data/user_academicStatusId')
@@ -25,7 +25,7 @@ def user_academicstatus_lookup():
 
 def user_discipline_lookup():
     file_ = open('ground/users_distribution_overDiscipline.via_resources')
-    count_abweichung = 0
+    #count_abweichung = 0
     userdiscipline_dict = collections.defaultdict(list)
     userowndiscipline_dict = collections.defaultdict(str)
     for line in file_:
@@ -42,7 +42,7 @@ def relevantuserdisc_lookup(threshold=0.0):
     """ returns 2 values: a dict with the number of relevat automatically detected disciplines for each user
 and the id of the self-added discipline for each user"""
     file_ = open('ground/users_distribution_overDiscipline.via_resources')
-    count_abweichung = 0
+    #count_abweichung = 0
     userdiscipline_dict = collections.defaultdict(list)
     userowndiscipline_dict = collections.defaultdict(str)
     for line in file_:
@@ -52,7 +52,7 @@ and the id of the self-added discipline for each user"""
         di = row[2]
         userowndiscipline_dict[user] = di
         #calculate
-        if (threshold > 0.0 and threshold <= 1.0 and not disciplines=={}):
+        if threshold > 0.0 and threshold <= 1.0 and not disciplines:
             m = max(disciplines.values())
             keys = disciplines.keys()
             for key in keys:
@@ -146,12 +146,13 @@ def read_extended_personomy_file(line):
 
 
 def specialist_info_lookup(userlist=None):
+    pass
     # userID nr_tag nr_tas fu trust fr trust eu trust eu trust t trust d trust nr_res
-    reader = csv.reader(open('results/specialist_info', 'r'), delimiter='\t')
-    count = 0
-    for line in reader:
+    #reader = csv.reader(open('results/specialist_info', 'r'), delimiter='\t')
+    # count = 0
+    #for line in reader:
         # todo: what happens here?
-        pass
+        #pass
 
 
   

@@ -2,7 +2,7 @@
 
 
 import pickle
-import collections
+# import collections
 from numpy import median
 
 from list_utilities import normalize_data

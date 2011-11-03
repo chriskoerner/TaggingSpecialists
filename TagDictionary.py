@@ -33,31 +33,31 @@ class TagDictionary(defaultdict):
         return [self[key] for key in self]
 
     def itervalues(self):
-        return ([self[key] for key in self])
+        return [self[key] for key in self]
 
     def values_degree(self):
-        return ([self[key].get_degree() for key in self])
+        return [self[key].get_degree() for key in self]
 
     def values_frequency_user(self):
-        return ([self[key].get_frequency_user() for key in self])
+        return [self[key].get_frequency_user() for key in self]
 
     def values_frequency_resource(self):
-        return ([self[key].get_frequency_resource() for key in self])
+        return [self[key].get_frequency_resource() for key in self]
 
     def values_entropy_user(self):
-        return ([self[key].get_entropy_user() for key in self])
+        return [self[key].get_entropy_user() for key in self]
 
     def values_entropy_resource(self):
-        return ([self[key].get_entropy_resource() for key in self])
+        return [self[key].get_entropy_resource() for key in self]
 
     def values_tfidf(self):
-        return ([self[key].get_tfidf() for key in self])
+        return [self[key].get_tfidf() for key in self]
 
     def values_degree_clean(self):
         ret = []
         k = []
         for key in self:
-            if (self[key].get_degree()):
+            if self[key].get_degree():
                 ret.append(self[key].get_degree())
                 k.append(key)
         return ret,k
@@ -66,7 +66,7 @@ class TagDictionary(defaultdict):
         ret = []
         k = []
         for key in self:
-            if (self[key].get_frequency_user()):
+            if self[key].get_frequency_user():
                 ret.append(self[key].get_frequency_user())
                 k.append(key)
         return ret,k
@@ -75,7 +75,7 @@ class TagDictionary(defaultdict):
         ret = []
         k = []
         for key in self:
-            if (self[key].get_frequency_resource()):
+            if self[key].get_frequency_resource():
                 ret.append(self[key].get_frequency_resource())
                 k.append(key)
         return ret,k
@@ -84,7 +84,7 @@ class TagDictionary(defaultdict):
         ret = []
         k = []
         for key in self:
-            if (self[key].get_entropy_user()):
+            if self[key].get_entropy_user():
                 ret.append(self[key].get_entropy_user())
                 k.append(key)
         return ret,k
@@ -93,7 +93,7 @@ class TagDictionary(defaultdict):
         ret = []
         k = []
         for key in self:
-            if (self[key].get_entropy_resource()):
+            if self[key].get_entropy_resource():
                 ret.append(self[key].get_entropy_resource())
                 k.append(key)
         return ret,k
@@ -102,7 +102,7 @@ class TagDictionary(defaultdict):
         ret = []
         k = []
         for key in self:
-            if (self[key].get_tfidf()):
+            if self[key].get_tfidf():
                 ret.append(self[key].get_tfidf())
                 k.append(key)
         return ret,k
